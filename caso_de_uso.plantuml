@@ -1,0 +1,34 @@
+
+@startuml SchoolHRM
+
+
+actor "Visitatore" as Visitatore
+actor "Studente" as Studente
+actor "Docente " as Docente
+
+package "SchoolHRM" {
+  usecase UC_auth as "Autenticazione"
+  usecase UC_manageProj as "Gestione progetti (CRUD)"
+  usecase UC_viewOwn as "Visualizza  progetti"
+  usecase UC_rate as "Valuta professori/progetti"
+  usecase UC_viewFeedback as "Visualizza feedback ricevuti"
+  usecase UC_doproj as "svolge i progetti"
+}
+
+Visitatore --> UC_viewOwn
+
+Studente --|> Visitatore
+Docente --|> Visitatore
+
+Docente --> UC_auth
+Docente --> UC_viewFeedback
+Docente --> UC_manageProj
+
+Studente --> UC_auth
+Studente --> UC_doproj
+Studente --> UC_rate
+
+UC_manageProj .> UC_viewOwn : <<include>>
+
+@enduml
+
